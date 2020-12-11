@@ -53,7 +53,7 @@ problemloop:
 		}
 	}
 
-	fmt.Printf("You scored %d out of %d.\n", correct, len(problems))
+	fmt.Printf(helpers.BuildScore(correct, len(problems)))
 }
 
 func exit(msg string) {
