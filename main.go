@@ -28,7 +28,7 @@ func main() {
 		exit("Failed to parse the provided CSV file.")
 	}
 
-	problems := helpers.ParseLines(lines)
+	problems := helpers.ParseQuiz(lines)
 
 	timer := time.NewTimer(time.Duration(*timeLimit) * time.Second)
 	correct := 0
@@ -44,6 +44,7 @@ problemloop:
 
 		select {
 		case <-timer.C:
+			fmt.Println()
 			break problemloop
 		case answer := <-answerCh:
 			if answer == p.Answer {
