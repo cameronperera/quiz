@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/cameronperera/quiz/src/game"
 	"github.com/cameronperera/quiz/src/helpers"
 )
 
@@ -53,7 +54,7 @@ problemloop:
 		}
 	}
 
-	fmt.Printf(helpers.BuildScore(correct, len(problems)))
+	fmt.Printf(game.BuildScore(correct, len(problems)))
 }
 
 func exit(msg string) {
