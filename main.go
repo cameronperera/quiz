@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/csv"
 	"flag"
 	"fmt"
 	"os"
@@ -16,17 +15,9 @@ func main() {
 	timeLimit := flag.Int("limit", 30, "the time limit for the quiz in seconds")
 	flag.Parse()
 
-	file, err := os.Open(*csvFilename)
+	var lines, err = helpers.ReadFile(*csvFilename)
 	if err != nil {
-		exit(fmt.Sprintf("Failed to open the CSV file: %s\n", *csvFilename))
-		os.Exit(1)
-	}
-
-	reader := csv.NewReader(file)
-
-	lines, err := reader.ReadAll()
-	if err != nil {
-		exit("Failed to parse the provided CSV file.")
+		exit(err.Error())
 	}
 
 	problems := helpers.ParseQuiz(lines)
@@ -35,7 +26,7 @@ func main() {
 	correct := 0
 problemloop:
 	for i, p := range problems {
-		fmt.Printf("Problems #%d: %s = ", i+1, p.Question)
+		fmt.Printf("Problem #%d: %s = ", i+1, p.Question)
 		answerCh := make(chan string)
 		go func() {
 			var answer string
