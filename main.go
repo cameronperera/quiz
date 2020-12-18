@@ -46,6 +46,7 @@ problemloop:
 	}
 
 	fmt.Printf(game.BuildScore(correct, len(problems)))
+	fmt.Printf("Score: %d%% correct\n", game.BuildScorePercentage(correct, len(problems)))
 }
 
 func exit(msg string) {
